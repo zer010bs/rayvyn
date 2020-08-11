@@ -1,0 +1,25 @@
+RFC // cve-tool feeds
+we currently reimplement a tool that monitors CVE-feeds/advisory-pages (step 1, already done), displays results on a searchable website (step 2, implementation) and alerts when certain thresholds are met (CVSS and/or CPE-matches). this tool will be free to use, i'd be happy to test the later alerting-mechanism with people from this channel.
+
+we
+implemented:
+NIST
+cisco-xml-feed
+
+backlog
+f5 - feed
+zdi - feed (has no CVSS)
+palo alto feed
+juniper-feed
+
+requirements for feed to be added to the cve-tool / automated updates
+
+MUST:
+machine-readable (rss, xml, json)
+free feed
+CVE
+CVE init and updates-timestamp (iso)
+SHOULD:
+CVSS
+description
+CPE

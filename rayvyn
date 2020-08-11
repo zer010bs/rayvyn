@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+#
+#
+# simple wrapper
+
+version="0.2.92 alpha - 2020-08-10"
+
+printf "
+
+__________    _____ _____.___.____   _________.___._______   
+\______   \  /  _  \ \__ |   |\   \ /   /\__  |   |\      \  
+ |       _/ /  /_\  \/   |   | \   Y   /  /   |   |/   |   \ 
+ |    |   \/    |    \____   |  \     /   \____   /    |    \\
+ |____|_  /\____|__  / ______|   \___/    / ______\____|__  /
+        \/         \/\/                   \/              \/ 
+                         rayvyn v $version                        
+
+"
+
+# here comes the basic setup
+if [ ! -f database/db.sqlite ]; then
+  # assume an inital installation
+  
+  bash install.sh
+  
+  . venv/bin/activate 
+  echo "
+
+setting up database
+
+  "
+  python3 setup.py
+  
+  cp docs/config.yaml.tpl config.yaml
+  cp docs/alert_emails.yaml.tpl alert_emails.yaml
+  
+  echo "
+
+basic setup done; 
+next steps:
+  - edit config.yaml and alert_emails.yaml 
+    if you want to receive email_alerts
+
+  - run $0 again to populate database 
+    (might take some time)
+    
+  - adjust cronjob
+
+
+  "
+  
+  exit
+  
+
+fi
+
+. venv/bin/activate
+
+
+
+if  [ "$1" = "-h" ]; then
+
+  echo "
+
+USAGE: $0
+
+  "
+  exit
+
+fi 
+
+
+
+python3 scraping.py
